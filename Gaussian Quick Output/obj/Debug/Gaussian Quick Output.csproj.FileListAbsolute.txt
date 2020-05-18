@@ -1,0 +1,9 @@
+c:\users\uthma\onedrive\documents\visual studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\bin\Debug\Gaussian Quick Output.exe.config
+c:\users\uthma\onedrive\documents\visual studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\bin\Debug\Gaussian Quick Output.exe
+c:\users\uthma\onedrive\documents\visual studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\bin\Debug\Gaussian Quick Output.pdb
+c:\users\uthma\onedrive\documents\visual studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\obj\Debug\Gaussian Quick Output.csprojResolveAssemblyReference.cache
+c:\users\uthma\onedrive\documents\visual studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\obj\Debug\Gaussian_Quick_Output.Form1.resources
+c:\users\uthma\onedrive\documents\visual studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\obj\Debug\Gaussian_Quick_Output.Properties.Resources.resources
+c:\users\uthma\onedrive\documents\visual studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\obj\Debug\Gaussian Quick Output.csproj.GenerateResource.Cache
+c:\users\uthma\onedrive\documents\visual studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\obj\Debug\Gaussian Quick Output.exe
+c:\users\uthma\onedrive\documents\visual studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\obj\Debug\Gaussian Quick Output.pdb
