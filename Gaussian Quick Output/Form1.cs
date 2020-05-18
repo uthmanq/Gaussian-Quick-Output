@@ -18,6 +18,8 @@ namespace Gaussian_Quick_Output
             InitializeComponent();
         }
 
+        public static string dataset = "";
+
         private void button1_Click(object sender, EventArgs e)
         {
             ChooseFolder();
@@ -84,7 +86,8 @@ namespace Gaussian_Quick_Output
                         csv += string.Format("{0} , {1} , {2} \n ", filename , enthalpies, imag);
                     }
                 }
-                MessageBox.Show("Quick Output found {0} log files to analyze. Saving now will create an Excel data sheet with {0} entries", i.ToString());
+                MessageBox.Show(string.Format("Quick Output found {0} log files to analyze. Saving now will create an Excel data sheet with {0} entries.", i.ToString()), "Data Analysis Status");
+                dataset = csv;
                 return csv;
             }
             else
@@ -105,8 +108,9 @@ namespace Gaussian_Quick_Output
                     Properties.Settings.Default.lastDirectory = folderBrowserDialog1.SelectedPath;
                 Properties.Settings.Default.Save();
 
-            //Encapsulated in a try/catch block so program doesnt die because of any exception
-            //Simply populates the list with all log files
+                //Encapsulated in a try/catch block so program doesnt die because of any exception
+                //Simply populates the list with all log files
+                listBox1.Items.Clear();
                 try
                 {
                     folderBrowserDialog1.SelectedPath = Properties.Settings.Default.lastDirectory;
@@ -163,6 +167,13 @@ namespace Gaussian_Quick_Output
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             dataLookup();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string s = processData();
+            Form2 form = new Form2();
+            form.Show();
         }
     }
 }
