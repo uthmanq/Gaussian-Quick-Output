@@ -21,25 +21,32 @@ namespace Gaussian_Quick_Output
         {
             DataTable dt = new DataTable();
             string[] lines = Form1.dataset.Split(new[] { '\r', '\n' });
-            foreach (string s in lines)
-                MessageBox.Show(s);
-            
+
             if (lines.Length > 0)
             {
                 string firstline = lines[0];
                 string[] headerLabels = firstline.Split(',');
                 foreach (string headerWord in headerLabels)
                 {
+
                     dt.Columns.Add(new DataColumn(headerWord));
 
+
+
                 }
-                for (int r = 1; r < lines.Length-1; r++)
-                {
-                    string line = lines[r];
-                    string [] lineArray = line.Split(',');
-                    dt.Rows.Add(lineArray);
-                }
+               // foreach (string s in lines)
+                //{
+
+
                     
+                    for (int r = 1; r < lines.Length - 1; r++)
+                    {
+                        string line = lines[r];
+                        string[] lineArray = line.Split(',');
+                        dt.Rows.Add(lineArray);
+                    }
+
+               // }
             }
             if (dt.Rows.Count>0)
             {

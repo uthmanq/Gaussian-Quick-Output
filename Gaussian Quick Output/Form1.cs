@@ -34,29 +34,56 @@ namespace Gaussian_Quick_Output
             //TODO: add an error message if value is null
             //Right now, it'll just return a substring from -1 onwards which can be fixed
             //TODO: add more functions such as entropies and items
-
-            if (comboBox1.Text == "File Name")
+            if (listBox1.SelectedIndex != -1)
             {
-                textBox1.Text = listBox1.Text.Substring(listBox1.Text.LastIndexOf(@"\") + 1);
-            }
-            else if (comboBox1.Text == "Enthalpies")
-            {
-                string file = System.IO.File.ReadAllText(listBox1.Text);
-                textBox1.Text = (file.Substring(file.IndexOf("Enthalpies") + 23, 12));
-            }
-            else if (comboBox1.Text == "Entropies")
-            {
-                string file = System.IO.File.ReadAllText(listBox1.Text);
-                //  textBox1.Text = (file.Substring(file.IndexOf("Entropies") + 22, 12));
-                textBox1.Text = "in progress";
-            }
-            else if (comboBox1.Text == "Image")
-            {
-                string file = System.IO.File.ReadAllText(listBox1.Text);
-                textBox1.Text = (file.Substring(file.IndexOf("Imag=")+5, 1));
+                if (comboBox1.Text == "File Name")
+                {
+                    textBox1.Text = listBox1.Text.Substring(listBox1.Text.LastIndexOf(@"\") + 1);
+                }
+                else if (comboBox1.Text == "Enthalpies")
+                {
+                    string file = System.IO.File.ReadAllText(listBox1.Text);
+                    textBox1.Text = (file.Substring(file.IndexOf("Enthalpies") + 23, 12));
+                }
+                else if (comboBox1.Text == "Entropies")
+                {
+                    string file = System.IO.File.ReadAllText(listBox1.Text);
+                    //  textBox1.Text = (file.Substring(file.IndexOf("Entropies") + 22, 12));
+                    textBox1.Text = "in progress";
+                }
+                else if (comboBox1.Text == "Image")
+                {
+                    string file = System.IO.File.ReadAllText(listBox1.Text);
+                    textBox1.Text = (file.Substring(file.IndexOf("Imag=") + 5, 1));
+                }
+                else if (comboBox1.Text == "Item Convergence")
+                {
+                    textBox1.Text = itemCheck(System.IO.File.ReadAllText(listBox1.Text));
+                }
             }
 
         }
+        public static string itemCheck (string s)
+        {
+            string sample = s.Substring(s.LastIndexOf("Item"), 342);
+            int count = CountStringOccurrences(sample, "YES");
+            return count.ToString() + "Y";
+        }
+
+        //A small subroutine to assist itemCheck
+        public static int CountStringOccurrences(string text, string pattern)
+        {
+            // Loop through all instances of the string 'text'.
+            int count = 0;
+            int i = 0;
+            while ((i = text.IndexOf(pattern, i)) != -1)
+            {
+                i += pattern.Length;
+                count++;
+            }
+            return count;
+        }
+
         /*Iterates through all files and builds the csv string file
             Returns a string with following format
                  File Name, Enthalpies, Imag=
@@ -64,15 +91,15 @@ namespace Gaussian_Quick_Output
                  filename2.log, 0000.00000, 0
                  filename3.log, 0000.00000, 0
          */
-         //TODO: need to add and remove columns based on selected data parameters from combobox1
-         //TODO URGENT (potential app-breaking bug):
-         //Not a fan of how csv string is a temporary, limited scope string. Needs to be saved as an application property
-         //that can be properly getted and setted
+        //TODO: need to add and remove columns based on selected data parameters from combobox1
+        //TODO URGENT (potential app-breaking bug):
+        //Not a fan of how csv string is a temporary, limited scope string. Needs to be saved as an application property
+        //that can be properly getted and setted
         public string processData ()
         {
             if (!String.IsNullOrEmpty( folderBrowserDialog1.SelectedPath))
             {
-                string csv = "File Name, Enthalpies, Imag= \n";
+                string csv = "File Name, Enthalpies, Imag=, Item Convergence \n";
                 int i = 0;
                 foreach (string file in Directory.GetFiles(folderBrowserDialog1.SelectedPath))
                 {
@@ -83,7 +110,8 @@ namespace Gaussian_Quick_Output
                         string filename = file.Substring(file.LastIndexOf(@"\") + 1);
                         string enthalpies = filetext.Substring(filetext.IndexOf("Enthalpies") + 23, 11);
                         string imag = filetext.Substring(filetext.IndexOf("Imag=") + 5, 1);
-                        csv += string.Format("{0} , {1} , {2} \n ", filename , enthalpies, imag);
+                        string item = itemCheck(filetext);
+                        csv += string.Format("{0} , {1} , {2} , {3} \n ", filename , enthalpies, imag, item);
                     }
                 }
                 MessageBox.Show(string.Format("Quick Output found {0} log files to analyze. Saving now will create an Excel data sheet with {0} entries.", i.ToString()), "Data Analysis Status");
@@ -157,6 +185,8 @@ namespace Gaussian_Quick_Output
             {
                 folderBrowserDialog1.SelectedPath = Properties.Settings.Default.lastDirectory;
             }
+
+            dataset = "";
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
