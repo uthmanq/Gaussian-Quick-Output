@@ -8,3 +8,4 @@ c:\users\uthma\onedrive\documents\visual studio 2017\Projects\Gaussian Quick Out
 c:\users\uthma\onedrive\documents\visual studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\obj\Debug\Gaussian Quick Output.exe
 c:\users\uthma\onedrive\documents\visual studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\obj\Debug\Gaussian Quick Output.pdb
 C:\Users\Uthma\OneDrive\Documents\Visual Studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\obj\Debug\Gaussian_Quick_Output.Form2.resources
+C:\Users\Uthma\OneDrive\Documents\Visual Studio 2017\Projects\Gaussian Quick Output\Gaussian Quick Output\obj\Debug\Gaussian_Quick_Output.Form3.resources

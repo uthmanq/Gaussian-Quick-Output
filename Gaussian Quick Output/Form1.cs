@@ -19,6 +19,7 @@ namespace Gaussian_Quick_Output
         }
 
         public static string dataset = "";
+        public static string fullreport = "";
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -123,6 +124,44 @@ namespace Gaussian_Quick_Output
                 return "";
             }
         }
+        public string processReport()
+        {
+            if (!String.IsNullOrEmpty(folderBrowserDialog1.SelectedPath))
+            {
+                string genereatedReport = "Generated Report: \n \n";
+                int i = 0;
+                foreach (string file in Directory.GetFiles(folderBrowserDialog1.SelectedPath))
+                {
+                    if (file.EndsWith(".log"))
+                    {
+                        i++;
+                        string filetext = System.IO.File.ReadAllText(file);
+                        string filename = file.Substring(file.LastIndexOf(@"\") + 1);
+                        string report = Report(filetext);
+                        
+                        genereatedReport += string.Format("Report for: {0} \n \n {1} \n \n", filename, report);
+                    }
+                }
+                MessageBox.Show(string.Format("Quick Output found {0} log files to analyze. Saving now will create a report sheet with {0} entries. Please review the data once it is completed. This is a BETA function and results may be incomplete or inconclusive", i.ToString()), "Report Analysis Status");
+                fullreport = genereatedReport;
+                return genereatedReport;
+            }
+            else
+            {
+                return "";
+            }
+        }
+        public static string Report (string text)
+        {
+            string part1 = text.Substring(text.LastIndexOf("SCF Done:"), 74);
+            string part2helper = text.Substring(text.LastIndexOf("Zero-point correction="),1364);
+            string part2 = part2helper.Substring(0, part2helper.LastIndexOf("Electronic"));
+            string part3helper = text.Substring(text.LastIndexOf("Center     Atomic                   Forces (Hartrees/Bohr)"));
+            string part3 = part3helper.Substring(0, part3helper.IndexOf("Cartesian"));
+            string total = part1 + "\n" + part2 + "\n" + part3;
+            return total;
+            
+        }
         public void ChooseFolder()
         {
             //A little bit of QoL code to set the default file to be the most recent file selected. 
@@ -203,6 +242,20 @@ namespace Gaussian_Quick_Output
         {
             string s = processData();
             Form2 form = new Form2();
+            form.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string s = processReport();
+            Form3 form = new Form3();
+            form.Show();
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            string s = processReport();
+            Form3 form = new Form3();
             form.Show();
         }
     }
