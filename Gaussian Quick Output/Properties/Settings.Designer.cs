@@ -34,5 +34,41 @@ namespace Gaussian_Quick_Output.Properties {
                 this["lastDirectory"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string fileTypeSearch {
+            get {
+                return ((string)(this["fileTypeSearch"]));
+            }
+            set {
+                this["fileTypeSearch"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CheckedItems {
+            get {
+                return ((string)(this["CheckedItems"]));
+            }
+            set {
+                this["CheckedItems"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ComFileProgram {
+            get {
+                return ((bool)(this["ComFileProgram"]));
+            }
+            set {
+                this["ComFileProgram"] = value;
+            }
+        }
     }
 }

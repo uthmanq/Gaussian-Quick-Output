@@ -20,34 +20,7 @@ namespace Gaussian_Quick_Output
         private void Form2_Load(object sender, EventArgs e)
         {
             DataTable dt = new DataTable();
-            string[] lines = Form1.dataset.Split(new[] { '\r', '\n' });
-
-            if (lines.Length > 0)
-            {
-                string firstline = lines[0];
-                string[] headerLabels = firstline.Split(',');
-                foreach (string headerWord in headerLabels)
-                {
-
-                    dt.Columns.Add(new DataColumn(headerWord));
-
-
-
-                }
-               // foreach (string s in lines)
-                //{
-
-
-                    
-                    for (int r = 1; r < lines.Length - 1; r++)
-                    {
-                        string line = lines[r];
-                        string[] lineArray = line.Split(',');
-                        dt.Rows.Add(lineArray);
-                    }
-
-               // }
-            }
+            dt = Form1.valueTable;
             if (dt.Rows.Count>0)
             {
                 dataGridView1.DataSource = dt;
