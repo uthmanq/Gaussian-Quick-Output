@@ -28,6 +28,8 @@ namespace Gaussian_Quick_Output
             ChooseFolder();
         }
 
+        
+
         //Function to preview data of log files
         //Some data validation would be nice, but not completely necessary
         public void dataLookup()
@@ -237,6 +239,40 @@ namespace Gaussian_Quick_Output
             }
         }
 
+        public void RefreshFolder()
+        {
+            fileList.Clear();
+            //A little bit of QoL code to set the default file to be the most recent file selected. 
+            //Reduces the headache of navigating through hella directories just to find your folder
+            //Just a little code snippet from Stackoverflow
+
+
+            if (!String.IsNullOrEmpty(Properties.Settings.Default.lastDirectory))
+            {
+
+                //Encapsulated in a try/catch block so program doesnt die because of any exception
+                //Simply populates the list with all log files
+                listBox1.Items.Clear();
+                try
+                {
+                    foreach (string file in Directory.GetFiles(folderBrowserDialog1.SelectedPath))
+                    {
+                        //Not sure if there's a smarter way to do this but this seems pretty fool-proof
+                        if (file.EndsWith(Properties.Settings.Default.fileTypeSearch))
+                        {
+                            listBox1.Items.Add(file);
+                            fileList.Add(file);
+                        }
+                    }
+                }
+                catch (Exception f)
+                {
+                    MessageBox.Show(f.ToString());
+                }
+            }
+            
+        }
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             dataLookup();
@@ -335,8 +371,13 @@ namespace Gaussian_Quick_Output
         {
             Form5 form = new Form5();
             form.Show();
+            //Makes event handler to detect when form5 is changed and settings are refreshed
+            form.FormClosing += Form5_FormClosing;
         }
-
+        private void Form5_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            RefreshFolder();
+        }
         private void listBox1_DoubleClick(object sender, EventArgs e)
         {
             if (listBox1.SelectedIndex != -1)

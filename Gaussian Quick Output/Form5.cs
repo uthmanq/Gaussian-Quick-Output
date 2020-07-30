@@ -30,6 +30,7 @@ namespace Gaussian_Quick_Output
             }
             Properties.Settings.Default.fileTypeSearch = comboBox1.Text;
             MessageBox.Show("Gaussian Quick Output will now search for files with the " + comboBox1.Text + " extension");
+            
             this.Close();
         }
 
@@ -39,6 +40,11 @@ namespace Gaussian_Quick_Output
                 comboBox1.Text = Properties.Settings.Default.fileTypeSearch;
 
                 checkBox1.Checked = Properties.Settings.Default.ComFileProgram;
+        }
+
+        private void Form5_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
     }
 }
